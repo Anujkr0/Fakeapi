@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Api</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <style>
+
+    </style>
+</head>
+<body>
+   <div >
+       <h2 class="text-center text-white">User Details</h2>
+       <table id="tab" border="1" class="table table-success table-striped">
+           <tr  ></tr>
+           <th>Profile</th>
+           <th>Name</th>
+           <th>gender</th>
+           <th>Country</th>
+
+       </table>
+
+   </div>
+   
+   <script>
+     fetch('https://randomuser.me/api/?results=5')
+.then(res=>res.json())
+    .then(data => {
+        let results = data.results;
+       
+        for (let i = 0; i < results.length; i++){
+            let url = results[i].picture.medium;
+            let name = results[i].name.first;
+            let dob = results[i].dob.date;
+            let gender = results[i].gender;
+            
+
+            let location = results[i].location.country;
+            let pincode= results[i].location.postcode;
+
+
+            
+
+            let table = document.querySelector('table');
+            let tableRow = document.createElement('tr');
+            tableRow.innerHTML = '<td>' + "<img src='" + url + "' class='image'>" + '</td>'+'<td>' + name+ '</td>' +'<td>' + dob+ '</td>' +'<td>' + gender ;
+            table.appendChild(tableRow);
+        }
+})
+   </script>
+</body>
+</html>
